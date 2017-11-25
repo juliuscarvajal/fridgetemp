@@ -1,0 +1,25 @@
+{
+  "name": "fridgetemp",
+  "version": "1.0.0",
+  "description": "Fridge Temperature Tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava",
+    "test:watch": "ava --watch",
+    "coverage": "nyc ava"
+  },
+  "author": "Julius Carvajal",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^0.23.0",
+    "nyc": "^11.3.0"
+  },
+  "ava": {
+    "files": [
+      "./src/**/*.spec.js"
+    ]
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
