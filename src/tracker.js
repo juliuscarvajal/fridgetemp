@@ -1,3 +1,5 @@
+// Some math functions used here (e.g. `Math.round10`) is not standard.
+// Refer to `./math.js` for more details.
 require('./math');
 
 const ascending = (a, b) => a - b;
