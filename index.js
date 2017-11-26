@@ -12,7 +12,7 @@ function help() {
   
   Outputs the average, median and mode temperature for each fridge
   
-  Usage: ${path.basename(process.argv[0])} ${path.basename(process.argv[1])} file-name-with-relevant-data.json
+  Usage: ${path.basename(process.argv[0])} ${path.basename(process.argv[1])} src/test/sample.json
   
   Where:
   file-name-with-relevant-data.json has the relevant fridge data with the following format:

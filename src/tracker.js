@@ -26,12 +26,22 @@ const mode = numbers => Object.entries(occurences(numbers))
   .map(([number]) => parseFloat(number))
   .sort(ascending);
 
+
+/**
+ * List of supported fields that is used by the `track` API
+ * @returns {object} An object of functions of supported fields
+ */
 const supportedFields = {
   average,
   median,
   mode,
 };
 
+/**
+ * Segreggates the source data by ids
+ * @param  {array} data An array of objects containing the ids and the temperatures
+ * @returns {object} An object that contains the ids as keys with the array of temperatures
+ */
 const segreggate = data => data ? data.reduce((results, current) => {
   const { id, temperature } = current;
   const { temperatures = [] } = results[id] || {};
@@ -43,6 +53,12 @@ const segreggate = data => data ? data.reduce((results, current) => {
   };
 }, {}) : {};
 
+/**
+ * Tracks the temperatures and returns the values specified by the fields parameter
+ * @param  {array} data An array of objects containing the ids and the temperatures
+ * @param  {array} fields An array of fields that should be returned (example: ['average', 'median', 'mode'])
+ * @returns {array} An array of objects containing the id and the requested fields and their corresponding values
+ */
 const track = (data, fields) => fields ? Object.entries(segreggate(data)).map(([id, value]) => {
   const { temperatures } = value;
   const merged = fields.reduce((results, current) => {
