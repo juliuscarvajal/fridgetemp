@@ -1,20 +1,10 @@
-const { fullDays } = require('./src/calculator');
 const path = require('path');
+const fs = require('fs');
+const { promisify } = require('util');
+const { track } = require('./src/tracker');
+const readFile = promisify(fs.readFile);
 const args = process.argv.slice(2);
 const [ file ] = args;
-
-// const fs = require('fs');
-
-// const data = '';
-
-// const readStream = fs.createReadStream(file, 'utf8');
-
-// readStream.on('data', function(chunk) {  
-//     data += chunk;
-// }).on('end', function() {
-//     console.log(data);
-// });
-
 
 function help() {
   const helpMsg = `
@@ -38,14 +28,14 @@ function help() {
   console.log(helpMsg);
 }
 
-function execute() {
-  const days = fullDays(startDate, endDate);
-  return (days == -1)
-    ? help()
-    : console.log(days);
+async function execute() {
+  const src = JSON.parse(await readFile(file, 'utf8'));
+  const data = track(src, ['average', 'median', 'mode']);
+  console.log(data);
+  return data
 }
 
-if (args.length != 2) {
+if (args.length !== 1) {
   help();
 } else {
   execute();
