@@ -12,7 +12,7 @@ Keeps track of the median and mode temperature from different fridges.
 ```
 cd fridgetemp
 npm install
-node index.js dd/mm/yyyy dd/mm/yyyy
+node index.js src/test/sample.json
 ```
 
 # Running tests
