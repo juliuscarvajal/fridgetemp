@@ -1,6 +1,6 @@
 require('./math');
 
-const segreggate = data => data.reduce((results, current) => {
+const segreggate = data => data ? data.reduce((results, current) => {
   const { id, temperature } = current;
   const { temperatures = [] } = results[id] || {};
   return {
@@ -9,7 +9,7 @@ const segreggate = data => data.reduce((results, current) => {
       temperatures: [...temperatures, temperature]
     }
   };
-}, {});
+}, {}) : {};
 
 const sum = numbers => numbers.reduce((results, current) => results + current, 0);
 
@@ -38,7 +38,7 @@ const supportedFields = {
   mode,
 };
 
-const track = (data, fields) => Object.entries(segreggate(data)).map(([id, value]) => {
+const track = (data, fields) => fields ? Object.entries(segreggate(data)).map(([id, value]) => {
   const { temperatures } = value;
   const merged = fields.reduce((results, current) => {
     return {
@@ -48,7 +48,7 @@ const track = (data, fields) => Object.entries(segreggate(data)).map(([id, value
   }, {});
   
   return { id, ...merged };
-});
+}) : [];
 
 module.exports = {
   track,
